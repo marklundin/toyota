@@ -23,6 +23,12 @@ var port = 8000,
 port = process.argv[2] ? parseInt(process.argv[2], 0) : port;
 
 function handleRequest(request, response) {
+    if (path.normalize(decodeURIComponent(urlObject.pathname)) !== decodeURIComponent(urlObject.pathname)) {
+        response.statusCode = 403;
+        response.end();
+        return;
+    }
+    
 
 	var urlObject = urlParser.parse(request.url, true);
 	var pathname = decodeURIComponent(urlObject.pathname);
